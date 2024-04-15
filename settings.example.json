@@ -1,0 +1,14 @@
+{
+    "username": "s.shoemaker",
+    "password": "",
+    "term": "Fall 2024",
+    "headless": false,
+    "course_codes_to_register_for": [
+        "SMA 130 01",
+        "SRT 280 01",
+        "SCS 390 01",
+        "SLA 150 06",
+        "SCS 301 01",
+        "SCJ 330 01"
+    ]
+}
