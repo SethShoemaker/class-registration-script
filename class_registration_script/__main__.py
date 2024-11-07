@@ -4,6 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
 import json
+import time
 
 
 with open("./settings.json", "r") as f:
@@ -12,6 +13,7 @@ with open("./settings.json", "r") as f:
     password = settings["password"]
     term = settings["term"]
     headless = settings["headless"]
+    dry_run = settings["dry_run"]
     course_codes_to_register_for = settings["course_codes_to_register_for"]
 
 
@@ -150,14 +152,19 @@ for course_code in course_codes_to_register_for:
     course_link.click()
     print(f'clicked link for "{course_code}"')
 
-    # # click the desired courses' link
-    # WebDriverWait(driver, 10).until(
-    #     EC.element_to_be_clickable((By.ID, "pg0_V_lnkAddCourse"))
-    # )
-    # add_course_link = driver.find_element(By.ID, "pg0_V_lnkAddCourse")
-    # print(f'found the add course link')
-    # add_course_link.click()
-    # print(f'clicked the add course link')
+    if dry_run:
+        print("this is a dry run, not clicking any buttons")
+        time.sleep(5)
+    else:
+        # click the desired courses' link
+        WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "pg0_V_lnkAddCourse"))
+        )
+        add_course_link = driver.find_element(By.ID, "pg0_V_lnkAddCourse")
+        print(f'found the add course link')
+        add_course_link.click()
+        print(f'clicked the add course link')
+    
 
     driver.get(course_search_url)
     print(f'going back to course search')
